@@ -1,6 +1,6 @@
 <template>
-  <div class="home">
-    <h2>home</h2>
+  <div class="App">
+    <h2>App</h2>
   </div>
 </template>
 
@@ -9,7 +9,7 @@
 </script>
 
 <style lang="less" scoped>
-.home{
+.App{
     background-color: red;
 }
 </style>
