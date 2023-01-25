@@ -7,6 +7,10 @@ const myPath = require("./myPath");
 let devConfig = require("./webpack.dev.js"); //开发模式下合并的配置
 let prodConfig = require("./webpack.prod.js"); //生产模式下合并的配置
 const MiniCssExtractPlugin = require("mini-css-extract-plugin"); //打包css
+const { DefinePlugin } = require("webpack"); //定义环境变量
+const AutoImport = require('unplugin-auto-import/webpack')
+const Components = require('unplugin-vue-components/webpack')
+const { ElementPlusResolver } = require('unplugin-vue-components/resolvers');
 
 let commonConfig = function (isProduction) {
   return {
@@ -46,10 +50,10 @@ let commonConfig = function (isProduction) {
         //async异步代码分割 initial同步代码分割 all同步异步分割都开启
         // chunks: "all", //同步异步都分割
         chunks: "all",
-        minSize: 2000, //拆分后的尺寸不小于20kb
-        maxSize: 10000, //拆分大于1000kb的文件
-        minChunks: 1, //最少引用1次才拆分
-        maxAsyncRequests: 30, //最大异步请求数
+        // minSize: 2000, //拆分后的尺寸不小于20kb
+        // maxSize: 10000, //拆分大于1000kb的文件
+        // minChunks: 1, //最少引用1次才拆分
+        // maxAsyncRequests: 30, //最大异步请求数
         cacheGroups: {
           //引用多名字类型的模块会被打包到vendors里面
           defaultVendors: {
@@ -148,11 +152,21 @@ let commonConfig = function (isProduction) {
         template: path.resolve(__dirname, "../public/index.html"),
       }),
       new VueLoaderPlugin(), //加载vue的template模块，同时也块级适配了热更新
-      // new webpack.DefinePlugin({
-      //   "process.env": {
-      //     NODE_ENV: '"production"',
-      //   },
-      // }),
+      new DefinePlugin({
+        __VUE_OPTIONS_API__: false,
+        __VUE_PROD_DEVTOOLS__: false,
+      }),
+
+
+
+
+      AutoImport({
+        resolvers: [ElementPlusResolver()],
+      }),
+      Components({
+        resolvers: [ElementPlusResolver()],
+      }),
+
     ],
   };
 };
