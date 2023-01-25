@@ -42,7 +42,6 @@
     "core-js": "^3.24.0",
     "inline-chunk-html-plugin": "^1.1.1",
     "mini-css-extract-plugin": "^2.6.1",
-    "normalize.css": "^8.0.1",
     "vue": "^3.2.37",
     "vue-loader": "^17.0.1",
     "vue-template-compiler": "^2.7.14"
