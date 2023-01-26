@@ -1,6 +1,7 @@
 
 module.exports = {
   mode: "development", //为除webpack.config.js外的模块可以使用配置的（webpack4之后）
+  devtool: "source-map",
   devServer: {
     //热模块更新，更改代码后，浏览器不会刷新，只会更新改变的代码
     hot: true,

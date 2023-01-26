@@ -13,6 +13,7 @@ module.exports = {
   //   //注册cdn，别的文件可以直接使用全局对象，这个不会被打包
   //   dayjs: "dayjs", //：模块名字：全局对象名字
   // },
+  devtool: false,
   plugins: [
     new MiniCssExtractPlugin({
       filename: "css/[name].[contenthash:10].css",
