@@ -155,6 +155,7 @@ let commonConfig = function (isProduction) {
       new DefinePlugin({
         __VUE_OPTIONS_API__: false,
         __VUE_PROD_DEVTOOLS__: false,
+        BASE_URL: JSON.stringify("./"),
       }),
 
 
