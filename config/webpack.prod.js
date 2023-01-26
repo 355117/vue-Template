@@ -1,3 +1,5 @@
+const path = require("path")
+
 const MiniCssExtractPlugin = require("mini-css-extract-plugin"); //打包css
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin"); //压缩css
 const CompressionPlugin = require("compression-webpack-plugin"); //压缩gzip文件，便于传输development模式下devServer自带gzip压缩
@@ -5,15 +7,23 @@ const CompressionPlugin = require("compression-webpack-plugin"); //压缩gzip文
 // const InlineChunkHtmlPlugin = require("react-dev-utils/InlineChunkHtmlPlugin"); //将runtime.js内联到html中
 var InlineChunkHtmlPlugin = require('inline-chunk-html-plugin');
 const HtmlWebpackPlugin = require("html-webpack-plugin"); //生成的html文件
+const CopyPlugin = require("copy-webpack-plugin"); //复制文件
 
 const webpack = require("webpack");
 module.exports = {
   mode: "production", //为除webpack.config.js外的模块可以使用配置的（webpack4之后）
-  // externals: {
-  //   //注册cdn，别的文件可以直接使用全局对象，这个不会被打包
-  //   dayjs: "dayjs", //：模块名字：全局对象名字
-  // },
   devtool: false,
+  externals: {
+    //注册cdn，别的文件可以直接使用全局对象，这个不会被打包
+    //：模块名字：全局对象名字
+    "vue": "Vue",
+    "vue-router": "VueRouter",
+    "Element-Plus": "ElementPlus",
+    "dayjs": "dayjs",
+    "axios": "axios",
+    "lodash": "_",
+    "normalize.css": "normalize.css",
+  },
   plugins: [
     new MiniCssExtractPlugin({
       filename: "css/[name].[contenthash:10].css",
@@ -30,5 +40,13 @@ module.exports = {
       algorithm: "gzip", //压缩算法
     }),
     new InlineChunkHtmlPlugin(HtmlWebpackPlugin, [/runtime.+\.js/]),
+    new CopyPlugin({
+      patterns: [
+        {
+          from: path.resolve(__dirname, '../public/favicon.ico'),
+          to: path.resolve(__dirname, '../dist/favicon.ico')
+        },
+      ],
+    }),
   ],
 };
