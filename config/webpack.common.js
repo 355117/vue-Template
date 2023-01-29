@@ -3,7 +3,6 @@ const HtmlWebpackPlugin = require("html-webpack-plugin"); //自动生成html文�
 const { VueLoaderPlugin } = require("vue-loader/dist/index"); //加载vue的template模块，同时也块级适配了热更新
 const { merge } = require("webpack-merge"); //合并webpack配置文件
 const TerserPlugin = require("terser-webpack-plugin"); //压缩js,默认是开启的
-const myPath = require("./myPath");
 let devConfig = require("./webpack.dev.js"); //开发模式下合并的配置
 let prodConfig = require("./webpack.prod.js"); //生产模式下合并的配置
 const MiniCssExtractPlugin = require("mini-css-extract-plugin"); //打包css
